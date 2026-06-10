@@ -17,7 +17,7 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
- 
+
   /* NAV */
   nav {
     position: fixed;
@@ -61,7 +61,7 @@
   .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
- 
+
   /* MENU OVERLAY */
   .menu-overlay {
     position: fixed; inset: 0; z-index: 99;
@@ -79,7 +79,7 @@
     letter-spacing: 0.18em; color: #1C1C1C;
     background: none; border: none; cursor: pointer; opacity: 0.8;
   }
- 
+
   /* HERO */
   .hero {
     position: relative; height: 100svh; overflow: hidden;
@@ -111,7 +111,7 @@
     left: 0; right: 0; display: flex; justify-content: center;
   }
   .hero-line div { width: 1px; height: 48px; background: rgba(255,255,255,0.5); }
- 
+
   /* REVEAL */
   .reveal {
     opacity: 0;
@@ -121,7 +121,7 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal[data-delay="80"] { transition-delay: 80ms; }
   .reveal[data-delay="100"] { transition-delay: 100ms; }
- 
+
   /* SECTIONS */
   .statement { padding: 80px 36px 72px; text-align: center; }
   .label {
@@ -134,7 +134,7 @@
     line-height: 1.35; letter-spacing: 0.03em; color: #1C1C1C;
   }
   .serif-h2 em { font-style: italic; font-weight: 300; color: #7A8C7B; }
- 
+
   /* IMAGE SECTIONS */
   .img-card {
     position: relative; margin: 0 20px;
@@ -146,7 +146,7 @@
     font-size: 9px; letter-spacing: 0.36em;
     color: rgba(255,255,255,0.72); font-weight: 300;
   }
- 
+
   /* PRODUCT INTRO */
   .product-intro { padding: 80px 36px 64px; }
   .product-intro .label { margin-bottom: 20px; }
@@ -155,18 +155,36 @@
     font-size: 30px; font-weight: 300;
     line-height: 1.35; letter-spacing: 0.03em; color: #1C1C1C;
   }
- 
+
   /* PRODUCT GRID */
   .product-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 12px; padding: 0 20px 8px;
   }
-  .product-item {}
-  .product-img-wrap { border-radius: 2px; overflow: hidden; margin-bottom: 14px; }
+  .product-item {
+    cursor: pointer;
+  }
+  .product-img-wrap {
+    border-radius: 2px; overflow: hidden; margin-bottom: 14px;
+    position: relative;
+  }
+  .product-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(28,28,28,0);
+    transition: background 0.3s;
+  }
+  .product-item:hover .product-img-wrap::after {
+    background: rgba(28,28,28,0.08);
+  }
   .product-img-wrap img {
     width: 100%; height: 240px;
     object-fit: cover; object-position: center;
     display: block; filter: brightness(0.96);
+    transition: transform 0.5s ease;
+  }
+  .product-item:hover .product-img-wrap img {
+    transform: scale(1.03);
   }
   .product-num {
     font-size: 9px; letter-spacing: 0.36em;
@@ -178,7 +196,11 @@
     letter-spacing: 0.03em; color: #1C1C1C;
     line-height: 1.5; white-space: pre-line;
   }
- 
+  .product-tap-hint {
+    font-size: 8px; letter-spacing: 0.28em;
+    color: #C4B5A8; margin-top: 8px; font-weight: 300;
+  }
+
   /* CTA */
   .cta-section { padding: 52px 36px 80px; text-align: center; }
   .cta-btn {
@@ -190,7 +212,7 @@
     color: #1C1C1C; cursor: pointer; font-weight: 300;
   }
   .divider { height: 1px; background: rgba(28,28,28,0.08); margin: 0 36px; }
- 
+
   /* JEJU FULL BLEED */
   .jeju-section { position: relative; margin-top: 80px; }
   .jeju-section img {
@@ -216,7 +238,7 @@
     line-height: 1.2; letter-spacing: 0.03em; color: #fff;
   }
   .jeju-bottom h2 em { font-style: italic; }
- 
+
   /* ETHOS */
   .ethos { padding: 88px 36px 72px; text-align: center; }
   .ethos .label { margin-bottom: 32px; }
@@ -227,7 +249,7 @@
     color: #1C1C1C; margin: 0 auto; max-width: 280px;
   }
   .ethos-rule { width: 32px; height: 1px; background: #C4B5A8; margin: 40px auto 0; }
- 
+
   /* LOTUS POND */
   .pond-section { position: relative; margin: 0 20px; border-radius: 2px; overflow: hidden; }
   .pond-section img {
@@ -251,7 +273,7 @@
     font-size: 8px; letter-spacing: 0.36em;
     color: rgba(255,255,255,0.65); margin-top: 8px; font-weight: 300;
   }
- 
+
   /* FEATURE */
   .feature { padding: 80px 0 0; }
   .feature-head { padding: 0 36px 32px; }
@@ -269,7 +291,7 @@
   }
   .feature-foot { padding: 36px 36px 0; }
   .feature-foot p { font-size: 9px; letter-spacing: 0.36em; color: #9A8F87; font-weight: 300; }
- 
+
   /* NEWSLETTER */
   .newsletter { padding: 96px 36px 80px; text-align: center; }
   .newsletter .label { margin-bottom: 24px; }
@@ -295,7 +317,7 @@
     font-size: 9px; letter-spacing: 0.38em;
     color: #F9F7F4; cursor: pointer; font-weight: 300; margin-top: 12px;
   }
- 
+
   /* FOOTER */
   footer {
     border-top: 1px solid rgba(28,28,28,0.08);
@@ -313,10 +335,137 @@
     color: #9A8F87; background: none; border: none; cursor: pointer; font-weight: 300;
   }
   .footer-copy { font-size: 8px; letter-spacing: 0.22em; color: #C4B5A8; font-weight: 300; }
+
+  /* ===================== */
+  /* PRODUCT DETAIL PANEL  */
+  /* ===================== */
+  .product-panel-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(28,24,20,0.5);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(4px);
+  }
+  .product-panel-backdrop.open {
+    opacity: 1; pointer-events: all;
+  }
+
+  .product-panel {
+    position: fixed;
+    bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%);
+    width: 100%; max-width: 430px;
+    z-index: 201;
+    background: #F9F7F4;
+    border-radius: 16px 16px 0 0;
+    max-height: 92svh;
+    overflow-y: auto;
+    transition: transform 0.48s cubic-bezier(0.32, 0.72, 0, 1);
+    -webkit-overflow-scrolling: touch;
+  }
+  .product-panel.open {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .panel-drag-bar {
+    width: 36px; height: 4px;
+    background: rgba(28,28,28,0.15);
+    border-radius: 2px;
+    margin: 14px auto 0;
+  }
+
+  .panel-close {
+    position: absolute; top: 18px; right: 22px;
+    background: none; border: none; cursor: pointer;
+    font-size: 20px; color: #9A8F87;
+    line-height: 1; padding: 4px;
+  }
+
+  .panel-img {
+    width: 100%; height: 340px;
+    object-fit: cover; object-position: center;
+    display: block;
+    margin-top: 12px;
+  }
+
+  .panel-body {
+    padding: 36px 32px 48px;
+  }
+
+  .panel-label {
+    font-size: 8px; letter-spacing: 0.44em;
+    color: #9A8F87; font-weight: 300; margin-bottom: 10px;
+  }
+
+  .panel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    line-height: 1.3; letter-spacing: 0.02em;
+    color: #1C1C1C; margin-bottom: 8px;
+  }
+
+  .panel-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400;
+    letter-spacing: 0.04em; color: #5C4A30;
+    margin-bottom: 28px;
+  }
+
+  .panel-divider {
+    height: 1px; background: rgba(28,28,28,0.08);
+    margin-bottom: 28px;
+  }
+
+  .panel-section-title {
+    font-size: 8px; letter-spacing: 0.42em;
+    color: #9A8F87; font-weight: 300;
+    margin-bottom: 14px;
+  }
+
+  .panel-desc {
+    font-size: 13px; line-height: 1.75;
+    color: #4A4540; font-weight: 300;
+    margin-bottom: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  .panel-ingredients {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .ingredient-tag {
+    font-size: 9px; letter-spacing: 0.22em;
+    color: #7A8C7B;
+    border: 1px solid rgba(122,140,123,0.35);
+    padding: 5px 12px;
+    border-radius: 1px; font-weight: 300;
+  }
+
+  .panel-badges {
+    display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap;
+  }
+  .panel-badge {
+    font-size: 8px; letter-spacing: 0.28em;
+    color: #9A8F87;
+    border: 1px solid rgba(28,28,28,0.12);
+    padding: 5px 12px; font-weight: 300;
+  }
+
+  .panel-buy-btn {
+    display: block; width: 100%;
+    background: #1C1C1C;
+    border: none; padding: 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; letter-spacing: 0.4em;
+    color: #F9F7F4; cursor: pointer; font-weight: 300;
+    text-decoration: none; text-align: center;
+    transition: background 0.3s;
+  }
+  .panel-buy-btn:hover { background: #3A3530; }
 </style>
 </head>
 <body>
- 
+
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">THE PURE LOTUS</div>
@@ -324,7 +473,7 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
- 
+
 <!-- MENU OVERLAY -->
 <div class="menu-overlay" id="menuOverlay">
   <button onclick="closeMenu()">Ritual</button>
@@ -332,7 +481,7 @@
   <button onclick="closeMenu()">Origins</button>
   <button onclick="closeMenu()">Ethos</button>
 </div>
- 
+
 <!-- HERO -->
 <section class="hero">
   <img src="https://images.unsplash.com/photo-1775406957198-7da59f23a86e?w=860&q=80" alt="Pure Lotus Hero" />
@@ -343,7 +492,7 @@
   </div>
   <div class="hero-line"><div></div></div>
 </section>
- 
+
 <!-- STATEMENT -->
 <div class="reveal">
   <section class="statement">
@@ -351,7 +500,7 @@
     <h2 class="serif-h2">Born from still<br /><em>waters</em></h2>
   </section>
 </div>
- 
+
 <!-- LOTUS DEWY -->
 <div class="reveal" data-delay="100">
   <div class="img-card">
@@ -359,7 +508,7 @@
     <p class="img-badge">LOTUS · RITUAL</p>
   </div>
 </div>
- 
+
 <!-- PRODUCT INTRO -->
 <div class="reveal">
   <section class="product-intro">
@@ -367,20 +516,21 @@
     <h2>Untouched.<br />Unfiltered.</h2>
   </section>
 </div>
- 
+
 <!-- PRODUCT GRID -->
 <div class="reveal" data-delay="80">
   <div class="product-grid">
-    <div class="product-item">
+    <div class="product-item" onclick="openPanel('cream')">
       <div class="product-img-wrap">
         <img src="cream.png" alt="리바이탈라이징크림" />
       </div>
       <p class="product-num">No. 01</p>
-      <p class="product-name">[탄력개선] 더퓨어로텃
+      <p class="product-name">[탄력개선] 더퓨어로터스
 제주 연꽃잎
 리바이탈라이징크림</p>
+      <p class="product-tap-hint">VIEW DETAILS →</p>
     </div>
-    <div class="product-item">
+    <div class="product-item" onclick="openPanel('sun')">
       <div class="product-img-wrap">
         <img src="sunscreen.png" alt="선스크린" />
       </div>
@@ -388,19 +538,20 @@
       <p class="product-name">더퓨어로터스
 제주보태니컬
 하이드로부스트 선스크린</p>
+      <p class="product-tap-hint">VIEW DETAILS →</p>
     </div>
   </div>
 </div>
- 
+
 <!-- CTA -->
 <div class="reveal">
   <section class="cta-section">
     <button class="cta-btn">EXPLORE RITUAL</button>
   </section>
 </div>
- 
+
 <div class="divider"></div>
- 
+
 <!-- JEJU FULL BLEED -->
 <div class="reveal">
   <section class="jeju-section">
@@ -412,7 +563,7 @@
     </div>
   </section>
 </div>
- 
+
 <!-- ETHOS -->
 <div class="reveal">
   <section class="ethos">
@@ -421,7 +572,7 @@
     <div class="ethos-rule"></div>
   </section>
 </div>
- 
+
 <!-- LOTUS POND -->
 <div class="reveal">
   <section class="pond-section">
@@ -433,7 +584,7 @@
     </div>
   </section>
 </div>
- 
+
 <!-- FEATURE PRODUCT -->
 <div class="reveal">
   <section class="feature">
@@ -445,7 +596,7 @@
     <div class="feature-foot"><p>VOLCANIC · MINERAL · LOTUS</p></div>
   </section>
 </div>
- 
+
 <!-- NEWSLETTER -->
 <div class="reveal">
   <section class="newsletter">
@@ -457,7 +608,7 @@
     </div>
   </section>
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <p class="footer-logo">THE PURE LOTUS</p>
@@ -469,13 +620,90 @@
   </div>
   <p class="footer-copy">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
 </footer>
- 
+
+<!-- ======================== -->
+<!-- PRODUCT DETAIL PANELS    -->
+<!-- ======================== -->
+
+<!-- BACKDROP -->
+<div class="product-panel-backdrop" id="panelBackdrop" onclick="closePanel()"></div>
+
+<!-- CREAM PANEL -->
+<div class="product-panel" id="panel-cream">
+  <div class="panel-drag-bar"></div>
+  <button class="panel-close" onclick="closePanel()">×</button>
+  <img class="panel-img" src="cream.png" alt="리바이탈라이징 크림" />
+  <div class="panel-body">
+    <p class="panel-label">NO. 01 · CREAM</p>
+    <h2 class="panel-title">제주 연꽃잎<br />리바이탈라이징 크림</h2>
+    <p class="panel-price">₩58,000 · 50ml</p>
+    <div class="panel-divider"></div>
+    <p class="panel-section-title">ABOUT</p>
+    <p class="panel-desc">탄력이 저하되고 지친 피부에 활성화 에너지를 전해주어 피부장벽 강화에 도움을 주는 사계절 필수 크림. 제주 연꽃잎 발효 성분이 수분·탄력·진정·주름개선·미백을 동시에 케어합니다.</p>
+    <p class="panel-section-title">KEY INGREDIENTS</p>
+    <div class="panel-ingredients">
+      <span class="ingredient-tag">연꽃잎 발효 추출물</span>
+      <span class="ingredient-tag">히알루론산</span>
+      <span class="ingredient-tag">병풀 추출물</span>
+      <span class="ingredient-tag">나이아신아마이드</span>
+      <span class="ingredient-tag">제주 화산수</span>
+      <span class="ingredient-tag">EGF 유사 펩타이드</span>
+    </div>
+    <div class="panel-badges">
+      <span class="panel-badge">VEGAN CERTIFIED</span>
+      <span class="panel-badge">SPF-FREE</span>
+      <span class="panel-badge">CLEAN BEAUTY</span>
+      <span class="panel-badge">주름개선 기능성</span>
+    </div>
+    <a class="panel-buy-btn"
+       href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000015"
+       target="_blank">
+      SHOP NOW
+    </a>
+  </div>
+</div>
+
+<!-- SUNSCREEN PANEL -->
+<div class="product-panel" id="panel-sun">
+  <div class="panel-drag-bar"></div>
+  <button class="panel-close" onclick="closePanel()">×</button>
+  <img class="panel-img" src="sunscreen.png" alt="하이드로부스트 선스크린" />
+  <div class="panel-body">
+    <p class="panel-label">NO. 02 · SUN CARE</p>
+    <h2 class="panel-title">제주보태니컬<br />하이드로부스트 선스크린</h2>
+    <p class="panel-price">₩30,000 · 50ml</p>
+    <div class="panel-divider"></div>
+    <p class="panel-section-title">ABOUT</p>
+    <p class="panel-desc">수분크림 제형의 무백탁 선스크린. SPF50+ PA++++의 강력한 자외선 차단력과 함께 제주 보태니컬 성분이 피부에 수분을 공급하며 주름개선·미백까지 케어합니다. 산호초에 무해한 성분으로 설계된 클린 선케어.</p>
+    <p class="panel-section-title">KEY INGREDIENTS</p>
+    <div class="panel-ingredients">
+      <span class="ingredient-tag">연꽃잎 발효 추출물</span>
+      <span class="ingredient-tag">제주 동백 오일</span>
+      <span class="ingredient-tag">알로에베라</span>
+      <span class="ingredient-tag">나이아신아마이드</span>
+      <span class="ingredient-tag">판테놀</span>
+      <span class="ingredient-tag">제주 화산수</span>
+    </div>
+    <div class="panel-badges">
+      <span class="panel-badge">SPF50+ PA++++</span>
+      <span class="panel-badge">무백탁</span>
+      <span class="panel-badge">VEGAN CERTIFIED</span>
+      <span class="panel-badge">REEF-SAFE</span>
+    </div>
+    <a class="panel-buy-btn"
+       href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000110"
+       target="_blank">
+      SHOP NOW
+    </a>
+  </div>
+</div>
+
 <script>
   // NAV scroll
   window.addEventListener('scroll', () => {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
   });
- 
+
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const overlay = document.getElementById('menuOverlay');
@@ -487,12 +715,42 @@
     hamburger.classList.remove('open');
     overlay.classList.remove('open');
   }
- 
+
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Product panel
+  let currentPanel = null;
+
+  function openPanel(id) {
+    closePanel(false);
+    const panel = document.getElementById('panel-' + id);
+    const backdrop = document.getElementById('panelBackdrop');
+    if (!panel) return;
+    currentPanel = panel;
+    backdrop.classList.add('open');
+    panel.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    panel.scrollTop = 0;
+  }
+
+  function closePanel(animate = true) {
+    const backdrop = document.getElementById('panelBackdrop');
+    if (currentPanel) {
+      currentPanel.classList.remove('open');
+    }
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    currentPanel = null;
+  }
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePanel();
+  });
 </script>
 </body>
 </html>
