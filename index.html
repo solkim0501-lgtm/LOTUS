@@ -8,79 +8,21 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #F9F7F4;
-    color: #1C1C1C;
-    max-width: 430px;
-    margin: 0 auto;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: #F9F7F4; color: #1C1C1C; max-width: 430px; margin: 0 auto; min-height: 100vh; overflow-x: hidden; }
 
-  /* LANG TOGGLE BAR */
-  .lang-bar {
-    position: fixed;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100%; max-width: 430px;
-    z-index: 300;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-    padding: 8px 0 7px;
-    background: rgba(249,247,244,0.96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(28,28,28,0.07);
-  }
-  .lang-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 9px; letter-spacing: 0.32em;
-    font-weight: 300; color: #9A8F87;
-    background: none; border: none; cursor: pointer;
-    padding: 4px 16px;
-    transition: color 0.3s;
-  }
+  /* LANG BAR */
+  .lang-bar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; z-index: 300; display: flex; justify-content: center; align-items: center; padding: 8px 0 7px; background: rgba(249,247,244,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(28,28,28,0.07); }
+  .lang-btn { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.32em; font-weight: 300; color: #9A8F87; background: none; border: none; cursor: pointer; padding: 4px 16px; transition: color 0.3s; }
   .lang-btn.active { color: #1C1C1C; font-weight: 400; }
-  .lang-sep {
-    width: 1px; height: 10px;
-    background: rgba(28,28,28,0.18);
-  }
+  .lang-sep { width: 1px; height: 10px; background: rgba(28,28,28,0.18); }
 
-  /* NAV — pushed down by lang bar */
-  nav {
-    position: fixed;
-    top: 33px; left: 50%;
-    transform: translateX(-50%);
-    width: 100%; max-width: 430px;
-    z-index: 100;
-    padding: 22px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background 0.5s, backdrop-filter 0.5s;
-  }
-  nav.scrolled {
-    background: rgba(249,247,244,0.88);
-    backdrop-filter: blur(12px);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px; letter-spacing: 0.22em;
-    font-weight: 400; color: #fff;
-    transition: color 0.4s;
-  }
+  /* NAV */
+  nav { position: fixed; top: 33px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; z-index: 100; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; transition: background 0.5s; }
+  nav.scrolled { background: rgba(249,247,244,0.88); backdrop-filter: blur(12px); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.22em; font-weight: 400; color: #fff; transition: color 0.4s; cursor: pointer; }
   nav.scrolled .nav-logo { color: #1C1C1C; }
-  .hamburger {
-    background: none; border: none; cursor: pointer;
-    display: flex; flex-direction: column; gap: 5px; padding: 4px;
-  }
-  .hamburger span {
-    display: block; height: 1px; background: #fff;
-    transition: background 0.4s, transform 0.3s, opacity 0.3s;
-    transform-origin: center;
-  }
+  .hamburger { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 4px; }
+  .hamburger span { display: block; height: 1px; background: #fff; transition: background 0.4s, transform 0.3s, opacity 0.3s; transform-origin: center; }
   nav.scrolled .hamburger span { background: #1C1C1C; }
   .hamburger span:nth-child(1) { width: 22px; }
   .hamburger span:nth-child(2) { width: 16px; }
@@ -90,46 +32,15 @@
   .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
   /* MENU OVERLAY */
-  .menu-overlay {
-    position: fixed; inset: 0; z-index: 99;
-    background: rgba(249,247,244,0.97);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 40px;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.5s;
-  }
+  .menu-overlay { position: fixed; inset: 0; z-index: 99; background: rgba(249,247,244,0.97); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.5s; }
   .menu-overlay.open { opacity: 1; pointer-events: all; }
-  .menu-overlay button {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px; font-weight: 300;
-    letter-spacing: 0.18em; color: #1C1C1C;
-    background: none; border: none; cursor: pointer; opacity: 0.8;
-  }
+  .menu-overlay button { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; letter-spacing: 0.18em; color: #1C1C1C; background: none; border: none; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
+  .menu-overlay button:hover { opacity: 1; }
+  .menu-num { font-family: 'DM Sans', sans-serif; font-size: 8px; letter-spacing: 0.3em; color: #C4B5A8; margin-right: 12px; }
 
-  /* HERO */
-  .hero { position: relative; height: 100svh; overflow: hidden; }
-  .hero img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    filter: brightness(0.82);
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 40%, rgba(249,247,244,0.22) 100%);
-  }
-  .hero-text {
-    position: absolute; bottom: 14%;
-    left: 0; right: 0; text-align: center; color: #fff;
-  }
-  .hero-sub { font-size: 10px; letter-spacing: 0.38em; margin-bottom: 14px; opacity: 0.85; font-weight: 300; }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 48px; font-weight: 300;
-    letter-spacing: 0.06em; line-height: 1.1; color: #fff;
-  }
-  .hero-line { position: absolute; bottom: 6%; left: 0; right: 0; display: flex; justify-content: center; }
-  .hero-line div { width: 1px; height: 48px; background: rgba(255,255,255,0.5); }
+  /* PAGES */
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
 
   /* REVEAL */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1.1s ease, transform 1.1s ease; }
@@ -137,44 +48,40 @@
   .reveal[data-delay="80"] { transition-delay: 80ms; }
   .reveal[data-delay="100"] { transition-delay: 100ms; }
 
-  /* SECTIONS */
-  .statement { padding: 80px 36px 72px; text-align: center; }
+  /* SHARED */
   .label { font-size: 9px; letter-spacing: 0.42em; color: #9A8F87; margin-bottom: 24px; font-weight: 300; }
-  .serif-h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 34px; font-weight: 300;
-    line-height: 1.35; letter-spacing: 0.03em; color: #1C1C1C;
-  }
+  .serif-h2 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.35; letter-spacing: 0.03em; color: #1C1C1C; }
   .serif-h2 em { font-style: italic; font-weight: 300; color: #7A8C7B; }
+  .divider { height: 1px; background: rgba(28,28,28,0.08); margin: 0 36px; }
 
-  /* IMAGE SECTIONS */
+  /* ── HOME ── */
+  .hero { position: relative; height: 100svh; overflow: hidden; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.82); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 40%, rgba(249,247,244,0.22) 100%); }
+  .hero-text { position: absolute; bottom: 14%; left: 0; right: 0; text-align: center; color: #fff; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.38em; margin-bottom: 14px; opacity: 0.85; font-weight: 300; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; letter-spacing: 0.06em; line-height: 1.1; color: #fff; }
+  .hero-line { position: absolute; bottom: 6%; left: 0; right: 0; display: flex; justify-content: center; }
+  .hero-line div { width: 1px; height: 48px; background: rgba(255,255,255,0.5); }
+  .statement { padding: 80px 36px 72px; text-align: center; }
   .img-card { position: relative; margin: 0 20px; border-radius: 2px; overflow: hidden; }
   .img-card img { width: 100%; height: 520px; object-fit: cover; display: block; }
   .img-badge { position: absolute; bottom: 28px; left: 28px; font-size: 9px; letter-spacing: 0.36em; color: rgba(255,255,255,0.72); font-weight: 300; }
-
-  /* PRODUCT INTRO */
   .product-intro { padding: 80px 36px 64px; }
   .product-intro .label { margin-bottom: 20px; }
   .product-intro h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; line-height: 1.35; letter-spacing: 0.03em; color: #1C1C1C; }
-
-  /* PRODUCT GRID */
   .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px 8px; }
   .product-item { cursor: pointer; }
   .product-img-wrap { border-radius: 2px; overflow: hidden; margin-bottom: 14px; position: relative; }
   .product-img-wrap::after { content: ''; position: absolute; inset: 0; background: rgba(28,28,28,0); transition: background 0.3s; }
   .product-item:hover .product-img-wrap::after { background: rgba(28,28,28,0.08); }
-  .product-img-wrap img { width: 100%; height: 240px; object-fit: cover; object-position: center; display: block; filter: brightness(0.96); transition: transform 0.5s ease; }
+  .product-img-wrap img { width: 100%; height: 240px; object-fit: cover; display: block; filter: brightness(0.96); transition: transform 0.5s ease; }
   .product-item:hover .product-img-wrap img { transform: scale(1.03); }
   .product-num { font-size: 9px; letter-spacing: 0.36em; color: #9A8F87; margin: 0 0 6px; font-weight: 300; }
   .product-name { font-family: 'Cormorant Garamond', serif; font-size: 12px; font-weight: 400; letter-spacing: 0.03em; color: #1C1C1C; line-height: 1.5; white-space: pre-line; }
   .product-tap-hint { font-size: 8px; letter-spacing: 0.28em; color: #C4B5A8; margin-top: 8px; font-weight: 300; }
-
-  /* CTA */
   .cta-section { padding: 52px 36px 80px; text-align: center; }
   .cta-btn { background: none; border: 1px solid rgba(28,28,28,0.25); padding: 13px 44px; font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.38em; color: #1C1C1C; cursor: pointer; font-weight: 300; }
-  .divider { height: 1px; background: rgba(28,28,28,0.08); margin: 0 36px; }
-
-  /* JEJU */
   .jeju-section { position: relative; margin-top: 80px; }
   .jeju-section img { width: 100%; height: 580px; object-fit: cover; object-position: center 30%; display: block; filter: brightness(0.88) saturate(0.9); }
   .jeju-fade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(249,247,244,0.55) 0%, transparent 50%); }
@@ -182,22 +89,16 @@
   .jeju-bottom { position: absolute; bottom: 48px; left: 32px; right: 32px; }
   .jeju-bottom h2 { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; line-height: 1.2; letter-spacing: 0.03em; color: #fff; }
   .jeju-bottom h2 em { font-style: italic; }
-
-  /* ETHOS */
   .ethos { padding: 88px 36px 72px; text-align: center; }
   .ethos .label { margin-bottom: 32px; }
   .ethos-quote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1.6; letter-spacing: 0.04em; color: #1C1C1C; margin: 0 auto; max-width: 280px; }
   .ethos-rule { width: 32px; height: 1px; background: #C4B5A8; margin: 40px auto 0; }
-
-  /* LOTUS POND */
   .pond-section { position: relative; margin: 0 20px; border-radius: 2px; overflow: hidden; }
   .pond-section img { width: 100%; height: 460px; object-fit: cover; display: block; filter: brightness(0.9) saturate(0.85); }
   .pond-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(122,140,123,0.12) 0%, transparent 70%); }
   .pond-text { position: absolute; bottom: 30px; right: 28px; text-align: right; }
   .pond-text p:first-child { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; color: #fff; letter-spacing: 0.05em; }
   .pond-text p:last-child { font-size: 8px; letter-spacing: 0.36em; color: rgba(255,255,255,0.65); margin-top: 8px; font-weight: 300; }
-
-  /* FEATURE */
   .feature { padding: 80px 0 0; }
   .feature-head { padding: 0 36px 32px; }
   .feature-head .label { margin-bottom: 16px; }
@@ -206,8 +107,6 @@
   .feature img { width: 100%; height: 500px; object-fit: cover; display: block; filter: brightness(0.87) saturate(0.85); }
   .feature-foot { padding: 36px 36px 0; }
   .feature-foot p { font-size: 9px; letter-spacing: 0.36em; color: #9A8F87; font-weight: 300; }
-
-  /* NEWSLETTER */
   .newsletter { padding: 96px 36px 80px; text-align: center; }
   .newsletter .label { margin-bottom: 24px; }
   .newsletter h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1.4; letter-spacing: 0.04em; color: #1C1C1C; margin-bottom: 44px; }
@@ -215,28 +114,106 @@
   .newsletter input { background: none; border: none; border-bottom: 1px solid rgba(28,28,28,0.2); padding: 12px 0; font-family: 'DM Sans', sans-serif; font-size: 13px; letter-spacing: 0.08em; color: #1C1C1C; outline: none; text-align: center; font-weight: 300; }
   .newsletter button { background: #1C1C1C; border: none; padding: 16px 44px; font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.38em; color: #F9F7F4; cursor: pointer; font-weight: 300; margin-top: 12px; }
 
+  /* ── SUB PAGE COMMON ── */
+  .sub-hero { position: relative; height: 56svh; overflow: hidden; margin-top: 33px; }
+  .sub-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.75) saturate(0.9); }
+  .sub-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%, rgba(249,247,244,0.3) 100%); }
+  .sub-hero-text { position: absolute; bottom: 44px; left: 36px; right: 36px; color: #fff; }
+  .sub-hero-text .label { color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+  .sub-hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1.15; letter-spacing: 0.04em; }
+  .sub-hero-text h1 em { font-style: italic; }
+  .sub-body { padding: 64px 36px 100px; }
+  .sub-section { margin-bottom: 72px; }
+  .sub-section:last-child { margin-bottom: 0; }
+  .sub-section .label { margin-bottom: 16px; }
+  .sub-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1.3; letter-spacing: 0.03em; color: #1C1C1C; margin-bottom: 20px; }
+  .sub-section h2 em { font-style: italic; color: #7A8C7B; }
+  .sub-section p { font-size: 13px; line-height: 1.8; color: #4A4540; font-weight: 300; letter-spacing: 0.01em; }
+  .sub-rule { width: 32px; height: 1px; background: #C4B5A8; margin: 40px 0; }
+
+  /* ── BOTANICAL 9 GRID ── */
+  .botanical-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px 12px; margin: 32px 0; }
+  .botanical-item { text-align: center; }
+  .botanical-emoji { font-size: 28px; margin-bottom: 8px; }
+  .botanical-name { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 400; letter-spacing: 0.03em; color: #1C1C1C; line-height: 1.4; }
+  .botanical-name-zh { font-size: 10px; color: #9A8F87; font-weight: 300; margin-top: 2px; }
+
+  /* ── ANTIOXIDANT CHART ── */
+  .chart-wrap { background: rgba(122,140,123,0.06); border: 1px solid rgba(122,140,123,0.15); border-radius: 4px; padding: 28px 24px; margin: 28px 0; }
+  .chart-title { font-size: 9px; letter-spacing: 0.32em; color: #7A8C7B; margin-bottom: 20px; font-weight: 300; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 80px; }
+  .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .chart-bar { width: 100%; background: rgba(122,140,123,0.25); border-radius: 2px 2px 0 0; position: relative; }
+  .chart-bar.highlight { background: #7A8C7B; }
+  .chart-val { font-size: 10px; font-weight: 400; color: #1C1C1C; }
+  .chart-lbl { font-size: 8px; letter-spacing: 0.18em; color: #9A8F87; font-weight: 300; text-align: center; }
+  .chart-note { font-size: 8px; letter-spacing: 0.18em; color: #C4B5A8; margin-top: 16px; font-weight: 300; }
+
+  /* ── PATENT CARD ── */
+  .patent-card { border: 1px solid rgba(28,28,28,0.1); border-radius: 2px; padding: 28px 24px; margin: 28px 0; }
+  .patent-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.12em; color: #7A8C7B; margin-bottom: 10px; }
+  .patent-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; line-height: 1.4; color: #1C1C1C; margin-bottom: 12px; }
+  .patent-desc { font-size: 12px; line-height: 1.75; color: #4A4540; font-weight: 300; }
+
+  /* ── CERT BADGES ── */
+  .cert-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+  .cert-badge { font-size: 8px; letter-spacing: 0.26em; color: #7A8C7B; border: 1px solid rgba(122,140,123,0.4); padding: 6px 14px; font-weight: 300; border-radius: 1px; }
+
+  /* ── JEJU STORY ── */
+  .story-pull { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; line-height: 1.5; letter-spacing: 0.03em; color: #1C1C1C; margin-bottom: 24px; }
+  .story-pull em { font-style: italic; color: #7A8C7B; }
+  .story-img { width: 100%; height: 320px; object-fit: cover; border-radius: 2px; display: block; margin: 28px 0; filter: brightness(0.92) saturate(0.85); }
+
+  /* ── ETHOS PAGE ── */
+  .ethos-card { background: rgba(122,140,123,0.07); border-radius: 2px; padding: 32px 28px; margin: 24px 0; }
+  .ethos-card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; letter-spacing: 0.04em; color: #1C1C1C; margin-bottom: 6px; }
+  .ethos-card-title em { font-style: italic; color: #7A8C7B; }
+  .ethos-card-sub { font-size: 8px; letter-spacing: 0.36em; color: #9A8F87; margin-bottom: 16px; font-weight: 300; }
+  .ethos-card p { font-size: 13px; line-height: 1.8; color: #4A4540; font-weight: 300; }
+
+  /* FSC */
+  .fsc-stat { display: flex; align-items: baseline; gap: 8px; margin: 24px 0 8px; }
+  .fsc-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #7A8C7B; line-height: 1; }
+  .fsc-unit { font-size: 9px; letter-spacing: 0.3em; color: #9A8F87; font-weight: 300; }
+  .fsc-desc { font-size: 12px; line-height: 1.7; color: #4A4540; font-weight: 300; margin-bottom: 20px; }
+
+  /* ── CONTACT PAGE ── */
+  .contact-block { margin-bottom: 48px; }
+  .contact-label { font-size: 8px; letter-spacing: 0.42em; color: #9A8F87; margin-bottom: 12px; font-weight: 300; }
+  .contact-phone { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; letter-spacing: 0.04em; color: #1C1C1C; margin-bottom: 6px; }
+  .contact-hours { font-size: 11px; letter-spacing: 0.12em; color: #9A8F87; font-weight: 300; }
+  .contact-info-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .contact-info-key { font-size: 8px; letter-spacing: 0.3em; color: #C4B5A8; font-weight: 300; min-width: 48px; padding-top: 2px; }
+  .contact-info-val { font-size: 12px; color: #4A4540; font-weight: 300; line-height: 1.6; }
+  .contact-qr-row { display: flex; gap: 24px; margin-top: 32px; }
+  .contact-qr-item { text-align: center; }
+  .contact-qr-box { width: 72px; height: 72px; background: rgba(28,28,28,0.06); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 28px; }
+  .contact-qr-lbl { font-size: 8px; letter-spacing: 0.26em; color: #9A8F87; font-weight: 300; }
+  .contact-channels { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+  .contact-channel-btn { font-size: 8px; letter-spacing: 0.28em; color: #7A8C7B; border: 1px solid rgba(122,140,123,0.4); padding: 8px 16px; font-weight: 300; background: none; cursor: pointer; }
+
   /* FOOTER */
   footer { border-top: 1px solid rgba(28,28,28,0.08); padding: 56px 36px 44px; text-align: center; }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; letter-spacing: 0.18em; color: #1C1C1C; margin-bottom: 32px; }
-  .footer-nav { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
+  .footer-nav { display: flex; justify-content: center; gap: 28px; margin-bottom: 40px; flex-wrap: wrap; }
   .footer-nav button { font-family: 'DM Sans', sans-serif; font-size: 8px; letter-spacing: 0.3em; color: #9A8F87; background: none; border: none; cursor: pointer; font-weight: 300; }
   .footer-copy { font-size: 8px; letter-spacing: 0.22em; color: #C4B5A8; font-weight: 300; }
 
   /* PRODUCT PANELS */
   .product-panel-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(28,24,20,0.5); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; backdrop-filter: blur(4px); }
   .product-panel-backdrop.open { opacity: 1; pointer-events: all; }
-  .product-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%); width: 100%; max-width: 430px; z-index: 201; background: #F9F7F4; border-radius: 16px 16px 0 0; max-height: 92svh; overflow-y: auto; transition: transform 0.48s cubic-bezier(0.32, 0.72, 0, 1); -webkit-overflow-scrolling: touch; }
+  .product-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%); width: 100%; max-width: 430px; z-index: 201; background: #F9F7F4; border-radius: 16px 16px 0 0; max-height: 92svh; overflow-y: auto; transition: transform 0.48s cubic-bezier(0.32,0.72,0,1); }
   .product-panel.open { transform: translateX(-50%) translateY(0); }
   .panel-drag-bar { width: 36px; height: 4px; background: rgba(28,28,28,0.15); border-radius: 2px; margin: 14px auto 0; }
   .panel-close { position: absolute; top: 18px; right: 22px; background: none; border: none; cursor: pointer; font-size: 20px; color: #9A8F87; line-height: 1; padding: 4px; }
-  .panel-img { width: 100%; height: 340px; object-fit: cover; object-position: center; display: block; margin-top: 12px; }
+  .panel-img { width: 100%; height: 340px; object-fit: cover; display: block; margin-top: 12px; }
   .panel-body { padding: 36px 32px 48px; }
   .panel-label { font-size: 8px; letter-spacing: 0.44em; color: #9A8F87; font-weight: 300; margin-bottom: 10px; }
-  .panel-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1.3; letter-spacing: 0.02em; color: #1C1C1C; margin-bottom: 8px; }
-  .panel-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; letter-spacing: 0.04em; color: #5C4A30; margin-bottom: 28px; }
+  .panel-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1.3; color: #1C1C1C; margin-bottom: 8px; }
+  .panel-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: #5C4A30; margin-bottom: 28px; }
   .panel-divider { height: 1px; background: rgba(28,28,28,0.08); margin-bottom: 28px; }
   .panel-section-title { font-size: 8px; letter-spacing: 0.42em; color: #9A8F87; font-weight: 300; margin-bottom: 14px; }
-  .panel-desc { font-size: 13px; line-height: 1.75; color: #4A4540; font-weight: 300; margin-bottom: 28px; letter-spacing: 0.01em; }
+  .panel-desc { font-size: 13px; line-height: 1.75; color: #4A4540; font-weight: 300; margin-bottom: 28px; }
   .panel-ingredients { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
   .ingredient-tag { font-size: 9px; letter-spacing: 0.22em; color: #7A8C7B; border: 1px solid rgba(122,140,123,0.35); padding: 5px 12px; border-radius: 1px; font-weight: 300; }
   .panel-badges { display: flex; gap: 10px; margin-bottom: 36px; flex-wrap: wrap; }
@@ -247,7 +224,7 @@
 </head>
 <body>
 
-<!-- LANG TOGGLE BAR -->
+<!-- LANG BAR -->
 <div class="lang-bar">
   <button class="lang-btn active" id="btnKo" onclick="setLang('ko')">한국어</button>
   <div class="lang-sep"></div>
@@ -256,167 +233,541 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">THE PURE LOTUS</div>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-logo" onclick="showPage('home')">THE PURE LOTUS</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MENU OVERLAY -->
 <div class="menu-overlay" id="menuOverlay">
-  <button onclick="closeMenu()" data-ko="리추얼" data-zh="护肤仪式">리추얼</button>
-  <button onclick="closeMenu()" data-ko="보태니컬" data-zh="植物成分">보태니컬</button>
-  <button onclick="closeMenu()" data-ko="오리진" data-zh="品牌起源">오리진</button>
-  <button onclick="closeMenu()" data-ko="에토스" data-zh="品牌理念">에토스</button>
+  <button onclick="showPage('botanical')"><span class="menu-num">01</span><span data-ko="성분 &amp; 연구" data-zh="成分 &amp; 研究">성분 &amp; 연구</span></button>
+  <button onclick="showPage('origin')"><span class="menu-num">02</span><span data-ko="제주 스토리" data-zh="济州故事">제주 스토리</span></button>
+  <button onclick="showPage('ethos')"><span class="menu-num">03</span><span data-ko="비건 &amp; 친환경" data-zh="纯素 &amp; 环保">비건 &amp; 친환경</span></button>
+  <button onclick="showPage('contact')"><span class="menu-num">04</span><span data-ko="문의" data-zh="联系我们">문의</span></button>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <img src="https://images.unsplash.com/photo-1775406957198-7da59f23a86e?w=860&q=80" alt="Pure Lotus Hero" />
-  <div class="hero-overlay"></div>
-  <div class="hero-text">
-    <p class="hero-sub" data-ko="PURE FROM JEJU" data-zh="济州岛屿成分 · 纯净之源">PURE FROM JEJU</p>
-    <h1 class="hero-title">The Pure<br />Lotus</h1>
-  </div>
-  <div class="hero-line"><div></div></div>
-</section>
+<!-- ══════════════════════════════ -->
+<!-- PAGE: HOME                    -->
+<!-- ══════════════════════════════ -->
+<div id="page-home" class="page active">
 
-<!-- STATEMENT -->
-<div class="reveal">
-  <section class="statement">
-    <p class="label" data-ko="TRUE CLEAN BEAUTY" data-zh="纯净美妆">TRUE CLEAN BEAUTY</p>
-    <h2 class="serif-h2" data-ko="Born from still<br /><em>waters</em>" data-zh="天然成分<br /><em>纯净诞生</em>">Born from still<br /><em>waters</em></h2>
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1775406957198-7da59f23a86e?w=860&q=80" alt="Pure Lotus Hero" />
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <p class="hero-sub" data-ko="PURE FROM JEJU" data-zh="济州岛屿成分 · 纯净之源">PURE FROM JEJU</p>
+      <h1 class="hero-title">The Pure<br />Lotus</h1>
+    </div>
+    <div class="hero-line"><div></div></div>
   </section>
-</div>
 
-<!-- LOTUS DEWY -->
-<div class="reveal" data-delay="100">
-  <div class="img-card">
-    <img src="https://images.unsplash.com/photo-1752757809676-6ec76bff637d?w=860&q=80" alt="Dewy Lotus" />
-    <p class="img-badge">LOTUS · RITUAL</p>
+  <div class="reveal">
+    <section class="statement">
+      <p class="label" data-ko="TRUE CLEAN BEAUTY" data-zh="纯净美妆">TRUE CLEAN BEAUTY</p>
+      <h2 class="serif-h2" data-ko="Born from still<br /><em>waters</em>" data-zh="天然成分<br /><em>纯净诞生</em>">Born from still<br /><em>waters</em></h2>
+    </section>
   </div>
-</div>
 
-<!-- PRODUCT INTRO -->
-<div class="reveal">
-  <section class="product-intro">
-    <p class="label" data-ko="THE COLLECTION" data-zh="纯净成分系列">THE COLLECTION</p>
-    <h2 data-ko="Untouched.<br />Unfiltered." data-zh="无添加.<br />植物精华.">Untouched.<br />Unfiltered.</h2>
-  </section>
-</div>
+  <div class="reveal" data-delay="100">
+    <div class="img-card">
+      <img src="https://images.unsplash.com/photo-1752757809676-6ec76bff637d?w=860&q=80" alt="Dewy Lotus" />
+      <p class="img-badge">LOTUS · RITUAL</p>
+    </div>
+  </div>
 
-<!-- PRODUCT GRID -->
-<div class="reveal" data-delay="80">
-  <div class="product-grid">
-    <div class="product-item" onclick="openPanel('cream')">
-      <div class="product-img-wrap">
-        <img src="cream.png" alt="리바이탈라이징크림" />
-      </div>
-      <p class="product-num">No. 01</p>
-      <p class="product-name" data-ko="[탄력개선] 더퓨어로터스&#10;제주 연꽃잎&#10;리바이탈라이징크림" data-zh="[弹力改善] 纯莲&#10;济州莲花叶&#10;活肤紧致面霜">[탄력개선] 더퓨어로터스
+  <div class="reveal">
+    <section class="product-intro">
+      <p class="label" data-ko="THE COLLECTION" data-zh="纯净成分系列">THE COLLECTION</p>
+      <h2 data-ko="Untouched.<br />Unfiltered." data-zh="无添加.<br />植物精华.">Untouched.<br />Unfiltered.</h2>
+    </section>
+  </div>
+
+  <div class="reveal" data-delay="80">
+    <div class="product-grid">
+      <div class="product-item" onclick="openPanel('cream')">
+        <div class="product-img-wrap"><img src="cream.png" alt="크림" /></div>
+        <p class="product-num">No. 01</p>
+        <p class="product-name" data-ko="[탄력개선] 더퓨어로터스&#10;제주 연꽃잎&#10;리바이탈라이징크림" data-zh="[弹力改善] 纯莲&#10;济州莲花叶&#10;活肤紧致面霜">[탄력개선] 더퓨어로터스
 제주 연꽃잎
 리바이탈라이징크림</p>
-      <p class="product-tap-hint" data-ko="VIEW DETAILS →" data-zh="查看详情 →">VIEW DETAILS →</p>
-    </div>
-    <div class="product-item" onclick="openPanel('sun')">
-      <div class="product-img-wrap">
-        <img src="sunscreen.png" alt="선스크린" />
+        <p class="product-tap-hint" data-ko="VIEW DETAILS →" data-zh="查看详情 →">VIEW DETAILS →</p>
       </div>
-      <p class="product-num">No. 02</p>
-      <p class="product-name" data-ko="더퓨어로터스&#10;제주보태니컬&#10;하이드로부스트 선스크린" data-zh="纯莲&#10;济州植物&#10;水润防晒霜">더퓨어로터스
+      <div class="product-item" onclick="openPanel('sun')">
+        <div class="product-img-wrap"><img src="sunscreen.png" alt="선스크린" /></div>
+        <p class="product-num">No. 02</p>
+        <p class="product-name" data-ko="더퓨어로터스&#10;제주보태니컬&#10;하이드로부스트 선스크린" data-zh="纯莲&#10;济州植物&#10;水润防晒霜">더퓨어로터스
 제주보태니컬
 하이드로부스트 선스크린</p>
-      <p class="product-tap-hint" data-ko="VIEW DETAILS →" data-zh="查看详情 →">VIEW DETAILS →</p>
+        <p class="product-tap-hint" data-ko="VIEW DETAILS →" data-zh="查看详情 →">VIEW DETAILS →</p>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CTA -->
-<div class="reveal">
-  <section class="cta-section">
-    <button class="cta-btn" data-ko="EXPLORE RITUAL" data-zh="探索护肤仪式">EXPLORE RITUAL</button>
-  </section>
-</div>
-
-<div class="divider"></div>
-
-<!-- JEJU FULL BLEED -->
-<div class="reveal">
-  <section class="jeju-section">
-    <img src="https://images.unsplash.com/photo-1724078715426-4655c0087e8e?w=860&q=80" alt="Jeju Nature" />
-    <div class="jeju-fade"></div>
-    <p class="jeju-top" data-ko="JEJU · ISLAND" data-zh="济州 · 韩国天然岛屿成分">JEJU · ISLAND</p>
-    <div class="jeju-bottom">
-      <h2 data-ko="Where earth<br /><em>breathes</em>" data-zh="大地<br /><em>呼吸</em>之处">Where earth<br /><em>breathes</em></h2>
-    </div>
-  </section>
-</div>
-
-<!-- ETHOS -->
-<div class="reveal">
-  <section class="ethos">
-    <p class="label" data-ko="OUR ETHOS" data-zh="纯净理念">OUR ETHOS</p>
-    <p class="ethos-quote" data-ko='"Nothing added.<br />Nothing taken."' data-zh='"纯净成分，<br />无多余添加."'>"Nothing added.<br />Nothing taken."</p>
-    <div class="ethos-rule"></div>
-  </section>
-</div>
-
-<!-- LOTUS POND -->
-<div class="reveal">
-  <section class="pond-section">
-    <img src="https://images.unsplash.com/photo-1734784438177-ade1c3eae95c?w=860&q=80" alt="Lotus Pond" />
-    <div class="pond-overlay"></div>
-    <div class="pond-text">
-      <p data-ko="Still. Pure." data-zh="静谧. 纯粹.">Still. Pure.</p>
-      <p data-ko="LOTUS POND · JEJU" data-zh="莲花池 · 济州">LOTUS POND · JEJU</p>
-    </div>
-  </section>
-</div>
-
-<!-- FEATURE PRODUCT -->
-<div class="reveal">
-  <section class="feature">
-    <div class="feature-head">
-      <p class="label" data-ko="HERO RITUAL" data-zh="成分党推荐">HERO RITUAL</p>
-      <h2 data-ko="Lotus Dew<br /><em>Serum</em>" data-zh="莲花植物精华<br /><em>草本精华液</em>">Lotus Dew<br /><em>Serum</em></h2>
-    </div>
-    <img src="https://images.unsplash.com/photo-1768081977305-b5db21d91ec1?w=860&q=80" alt="Jeju Ocean" />
-    <div class="feature-foot"><p data-ko="VOLCANIC · MINERAL · LOTUS" data-zh="植物精华 · 天然成分 · 济州莲花">VOLCANIC · MINERAL · LOTUS</p></div>
-  </section>
-</div>
-
-<!-- NEWSLETTER -->
-<div class="reveal">
-  <section class="newsletter">
-    <p class="label" data-ko="THE RITUAL EDIT" data-zh="纯净美妆通讯">THE RITUAL EDIT</p>
-    <h2 data-ko="Join the stillness" data-zh="加入纯净美妆之旅">Join the stillness</h2>
-    <div class="newsletter-form">
-      <input type="email" id="emailInput" data-ko-placeholder="your@email.com" data-zh-placeholder="您的邮箱地址" placeholder="your@email.com" />
-      <button data-ko="ENTER" data-zh="订阅">ENTER</button>
-    </div>
-  </section>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p class="footer-logo">THE PURE LOTUS</p>
-  <div class="footer-nav">
-    <button data-ko="RITUAL" data-zh="护肤仪式">RITUAL</button>
-    <button data-ko="ORIGINS" data-zh="品牌起源">ORIGINS</button>
-    <button data-ko="ETHOS" data-zh="品牌理念">ETHOS</button>
-    <button data-ko="CONTACT" data-zh="联系我们">CONTACT</button>
+  <div class="reveal">
+    <section class="cta-section">
+      <button class="cta-btn" data-ko="EXPLORE RITUAL" data-zh="探索护肤仪式">EXPLORE RITUAL</button>
+    </section>
   </div>
-  <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
-</footer>
 
-<!-- BACKDROP -->
+  <div class="divider"></div>
+
+  <div class="reveal">
+    <section class="jeju-section">
+      <img src="https://images.unsplash.com/photo-1724078715426-4655c0087e8e?w=860&q=80" alt="Jeju" />
+      <div class="jeju-fade"></div>
+      <p class="jeju-top" data-ko="JEJU · ISLAND" data-zh="济州 · 韩国天然岛屿成分">JEJU · ISLAND</p>
+      <div class="jeju-bottom">
+        <h2 data-ko="Where earth<br /><em>breathes</em>" data-zh="大地<br /><em>呼吸</em>之处">Where earth<br /><em>breathes</em></h2>
+      </div>
+    </section>
+  </div>
+
+  <div class="reveal">
+    <section class="ethos">
+      <p class="label" data-ko="OUR ETHOS" data-zh="纯净理念">OUR ETHOS</p>
+      <p class="ethos-quote" data-ko='"Nothing added.<br />Nothing taken."' data-zh='"纯净成分，<br />无多余添加."'>"Nothing added.<br />Nothing taken."</p>
+      <div class="ethos-rule"></div>
+    </section>
+  </div>
+
+  <div class="reveal">
+    <section class="pond-section">
+      <img src="https://images.unsplash.com/photo-1734784438177-ade1c3eae95c?w=860&q=80" alt="Lotus Pond" />
+      <div class="pond-overlay"></div>
+      <div class="pond-text">
+        <p data-ko="Still. Pure." data-zh="静谧. 纯粹.">Still. Pure.</p>
+        <p data-ko="LOTUS POND · JEJU" data-zh="莲花池 · 济州">LOTUS POND · JEJU</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="reveal">
+    <section class="feature">
+      <div class="feature-head">
+        <p class="label" data-ko="HERO RITUAL" data-zh="成分党推荐">HERO RITUAL</p>
+        <h2 data-ko="Lotus Dew<br /><em>Serum</em>" data-zh="莲花植物精华<br /><em>草本精华液</em>">Lotus Dew<br /><em>Serum</em></h2>
+      </div>
+      <img src="https://images.unsplash.com/photo-1768081977305-b5db21d91ec1?w=860&q=80" alt="Jeju Ocean" />
+      <div class="feature-foot"><p data-ko="VOLCANIC · MINERAL · LOTUS" data-zh="植物精华 · 天然成分 · 济州莲花">VOLCANIC · MINERAL · LOTUS</p></div>
+    </section>
+  </div>
+
+  <div class="reveal">
+    <section class="newsletter">
+      <p class="label" data-ko="THE RITUAL EDIT" data-zh="纯净美妆通讯">THE RITUAL EDIT</p>
+      <h2 data-ko="Join the stillness" data-zh="加入纯净美妆之旅">Join the stillness</h2>
+      <div class="newsletter-form">
+        <input type="email" id="emailInput" placeholder="your@email.com" data-ko-placeholder="your@email.com" data-zh-placeholder="您的邮箱地址" />
+        <button data-ko="ENTER" data-zh="订阅">ENTER</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p class="footer-logo">THE PURE LOTUS</p>
+    <div class="footer-nav">
+      <button onclick="showPage('botanical')" data-ko="성분 &amp; 연구" data-zh="成分 &amp; 研究">성분 &amp; 연구</button>
+      <button onclick="showPage('origin')" data-ko="제주 스토리" data-zh="济州故事">제주 스토리</button>
+      <button onclick="showPage('ethos')" data-ko="비건 &amp; 친환경" data-zh="纯素 &amp; 环保">비건 &amp; 친환경</button>
+      <button onclick="showPage('contact')" data-ko="문의" data-zh="联系我们">문의</button>
+    </div>
+    <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE: BOTANICAL / 성분 & 연구  -->
+<!-- ══════════════════════════════ -->
+<div id="page-botanical" class="page">
+  <div class="sub-hero">
+    <img src="https://images.unsplash.com/photo-1752757809676-6ec76bff637d?w=860&q=80" alt="Botanical" />
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-text">
+      <p class="label" data-ko="SCIENCE · NATURE" data-zh="科学 · 自然">SCIENCE · NATURE</p>
+      <h1 data-ko="성분 &amp;<br /><em>연구</em>" data-zh="成分 &amp;<br /><em>研究</em>">성분 &amp;<br /><em>연구</em></h1>
+    </div>
+  </div>
+
+  <div class="sub-body">
+
+    <!-- BOTANICAL 9 -->
+    <div class="sub-section reveal">
+      <p class="label" data-ko="JEJU BOTANICAL COMPLEX 9" data-zh="济州植物复合精华 9">JEJU BOTANICAL COMPLEX 9</p>
+      <h2 data-ko="제주에서 온<br /><em>9가지 식물 원료</em>" data-zh="来自济州的<br /><em>9种植物精华</em>">제주에서 온<br /><em>9가지 식물 원료</em></h2>
+      <div class="botanical-grid">
+        <div class="botanical-item">
+          <div class="botanical-emoji">🪷</div>
+          <p class="botanical-name" data-ko="백련잎" data-zh="白莲叶">백련잎</p>
+          <p class="botanical-name-zh" data-ko="White Lotus Leaf" data-zh="白莲花叶">White Lotus Leaf</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌱</div>
+          <p class="botanical-name" data-ko="연꽃 뿌리" data-zh="莲花根">연꽃 뿌리</p>
+          <p class="botanical-name-zh" data-ko="Lotus Root" data-zh="莲藕提取物">Lotus Root</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🍵</div>
+          <p class="botanical-name" data-ko="녹차" data-zh="绿茶">녹차</p>
+          <p class="botanical-name-zh" data-ko="Green Tea" data-zh="绿茶提取物">Green Tea</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🍊</div>
+          <p class="botanical-name" data-ko="귤껍질" data-zh="橘皮">귤껍질</p>
+          <p class="botanical-name-zh" data-ko="Tangerine Peel" data-zh="橘皮提取物">Tangerine Peel</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌿</div>
+          <p class="botanical-name" data-ko="알로에베라잎" data-zh="芦荟叶">알로에베라잎</p>
+          <p class="botanical-name-zh" data-ko="Aloe Vera" data-zh="芦荟提取物">Aloe Vera</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌾</div>
+          <p class="botanical-name" data-ko="쌀" data-zh="大米">쌀</p>
+          <p class="botanical-name-zh" data-ko="Rice Extract" data-zh="米提取物">Rice Extract</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌲</div>
+          <p class="botanical-name" data-ko="예덕나무 추출물" data-zh="野漆树提取物">예덕나무 추출물</p>
+          <p class="botanical-name-zh" data-ko="Mallotus Extract" data-zh="野漆树草本">Mallotus Extract</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌵</div>
+          <p class="botanical-name" data-ko="코치닐선인장열매" data-zh="仙人掌果">코치닐선인장열매</p>
+          <p class="botanical-name-zh" data-ko="Cactus Fruit" data-zh="仙人掌提取物">Cactus Fruit</p>
+        </div>
+        <div class="botanical-item">
+          <div class="botanical-emoji">🌿</div>
+          <p class="botanical-name" data-ko="로즈마리" data-zh="迷迭香">로즈마리</p>
+          <p class="botanical-name-zh" data-ko="Rosemary" data-zh="迷迭香提取物">Rosemary</p>
+        </div>
+      </div>
+      <p class="sub-section" style="margin-bottom:0">
+        <span data-ko="피부 자극을 줄인 안전한 원료, 클린한 제품으로 고객의 건강한 피부를 위해 앞장섭니다." data-zh="采用低刺激安全原料，以纯净配方守护肌肤健康。适合敏感肌肤的植物精华成分。">피부 자극을 줄인 안전한 원료, 클린한 제품으로 고객의 건강한 피부를 위해 앞장섭니다.</span>
+      </p>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <!-- ANTIOXIDANT DATA -->
+    <div class="sub-section reveal">
+      <p class="label" data-ko="CLINICAL DATA" data-zh="临床数据">CLINICAL DATA</p>
+      <h2 data-ko="백련잎의<br /><em>항산화 테스트</em>" data-zh="白莲叶<br /><em>抗氧化测试</em>">백련잎의<br /><em>항산화 테스트</em></h2>
+      <p data-ko="제주 연꽃잎 추출물의 농도별 DPPH 자유 라디칼 소거 활성은 시료의 농도에 비례하여 강력한 항산화 활성이 입증되었습니다." data-zh="经检测机构（株）Biospectrum证明，济州莲花叶提取物在100μg/mL浓度下DPPH自由基清除率高达72%，抗氧化活性随浓度增加显著提升。">제주 연꽃잎 추출물의 농도별 DPPH 자유 라디칼 소거 활성은 시료의 농도에 비례하여 강력한 항산화 활성이 입증되었습니다.</p>
+
+      <div class="chart-wrap">
+        <p class="chart-title" data-ko="DPPH 라디칼 소거능 (%) — 연꽃잎 추출물 농도별" data-zh="DPPH自由基清除率(%) — 按莲花叶提取物浓度">DPPH 라디칼 소거능 (%) — 연꽃잎 추출물 농도별</p>
+        <div class="chart-bars">
+          <div class="chart-bar-wrap">
+            <p class="chart-val">62</p>
+            <div class="chart-bar" style="height:69%"></div>
+            <p class="chart-lbl">AA10<br />(대조군)</p>
+          </div>
+          <div class="chart-bar-wrap">
+            <p class="chart-val">20</p>
+            <div class="chart-bar" style="height:22%"></div>
+            <p class="chart-lbl">10<br />μg/mL</p>
+          </div>
+          <div class="chart-bar-wrap">
+            <p class="chart-val">54</p>
+            <div class="chart-bar" style="height:60%"></div>
+            <p class="chart-lbl">50<br />μg/mL</p>
+          </div>
+          <div class="chart-bar-wrap">
+            <p class="chart-val">72</p>
+            <div class="chart-bar highlight" style="height:80%"></div>
+            <p class="chart-lbl">100<br />μg/mL</p>
+          </div>
+        </div>
+        <p class="chart-note" data-ko="검사기관: (주)바이오스펙트럼 / 제주대학교 생명과학 기술혁신센터" data-zh="检测机构: Biospectrum / 济州大学生命科学技术创新中心">검사기관: (주)바이오스펙트럼 / 제주대학교 생명과학 기술혁신센터</p>
+      </div>
+
+      <p data-ko="폴리페놀 함량 비교 시험에서도 더로터스 연꽃잎은 국내산 연꽃잎 중 폴리페놀 함량 및 항산화 활성이 가장 높은 수치를 기록했습니다." data-zh="多酚含量对比试验中，The Pure Lotus莲花叶在国内莲花叶中多酚含量及抗氧化活性位居首位，富含黄酮类成分。">폴리페놀 함량 비교 시험에서도 더로터스 연꽃잎은 국내산 연꽃잎 중 폴리페놀 함량 및 항산화 활성이 가장 높은 수치를 기록했습니다.</p>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <!-- PATENT -->
+    <div class="sub-section reveal">
+      <p class="label" data-ko="PATENTED TECHNOLOGY" data-zh="专利技术">PATENTED TECHNOLOGY</p>
+      <h2 data-ko="더퓨어로터스만의<br /><em>특허 기술</em>" data-zh="The Pure Lotus<br /><em>独家专利技术</em>">더퓨어로터스만의<br /><em>특허 기술</em></h2>
+      <div class="patent-card">
+        <p class="patent-num">특허 제 10-2296348호</p>
+        <p class="patent-title" data-ko="연꽃 추출물 또는 예덕나무 추출물을 이용한 항염증, 항알러지 또는 항산화용 조성물" data-zh="利用莲花提取物或野漆树提取物的抗炎、抗过敏及抗氧化组合物">연꽃 추출물 또는 예덕나무 추출물을 이용한 항염증, 항알러지 또는 항산화용 조성물</p>
+        <p class="patent-desc" data-ko="항산화, 항염증, 항균 — 세포를 파괴하고 손상시키는 노화의 주범인 활성산소(ROS)와 자유라디칼을 억제하여 피부노화로부터 피부를 지켜줍니다." data-zh="抗氧化、抗炎、抗菌——抑制导致细胞损伤的活性氧(ROS)与自由基，从根源守护肌肤不老化。">항산화, 항염증, 항균 — 세포를 파괴하고 손상시키는 노화의 주범인 활성산소(ROS)와 자유라디칼을 억제하여 피부노화로부터 피부를 지켜줍니다.</p>
+      </div>
+      <div class="patent-card">
+        <p class="patent-num">특허 제 10-2357619호</p>
+        <p class="patent-title" data-ko="연잎 발효물을 이용한 피부 보습용 조성물" data-zh="利用莲叶发酵物的皮肤保湿组合物">연잎 발효물을 이용한 피부 보습용 조성물</p>
+        <p class="patent-desc" data-ko="보습인자로 잘 알려진 히알루로나의 생성을 크게 증가시켜 피부 수분 개선에 도움을 줍니다." data-zh="显著促进透明质酸(保湿因子)的生成，有效改善肌肤水分。">보습인자로 잘 알려진 히알루로나의 생성을 크게 증가시켜 피부 수분 개선에 도움을 줍니다.</p>
+      </div>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="sub-section reveal">
+      <p class="label" data-ko="CERTIFICATIONS &amp; AWARDS" data-zh="认证 &amp; 荣誉">CERTIFICATIONS &amp; AWARDS</p>
+      <h2 data-ko="국제가 인정한<br /><em>브랜드 신뢰</em>" data-zh="国际认证<br /><em>品牌信赖</em>">국제가 인정한<br /><em>브랜드 신뢰</em></h2>
+      <div class="cert-list">
+        <span class="cert-badge">VEGAN CERTIFIED</span>
+        <span class="cert-badge">ISO</span>
+        <span class="cert-badge">cGMP</span>
+        <span class="cert-badge">CPNP</span>
+        <span class="cert-badge">COSMETIC CERT JEJU</span>
+        <span class="cert-badge">JEJU STARS 2020</span>
+      </div>
+      <p data-ko="미국 BEST K-BEAUTY AWARDS 3년 연속 수상 · 싱가폴 BEST BEAUTY BUYS 에디터초이스 2년 연속 선정 · JCC 제주인증 / 유럽인증 취득" data-zh="连续3年荣获美国BEST K-BEAUTY AWARDS · 连续2年入选新加坡BEST BEAUTY BUYS编辑推荐 · JCC济州认证 / 欧洲CPNP认证">미국 BEST K-BEAUTY AWARDS 3년 연속 수상 · 싱가폴 BEST BEAUTY BUYS 에디터초이스 2년 연속 선정 · JCC 제주인증 / 유럽인증 취득</p>
+    </div>
+
+  </div>
+  <footer>
+    <p class="footer-logo">THE PURE LOTUS</p>
+    <div class="footer-nav">
+      <button onclick="showPage('home')" data-ko="홈" data-zh="首页">홈</button>
+      <button onclick="showPage('origin')" data-ko="제주 스토리" data-zh="济州故事">제주 스토리</button>
+      <button onclick="showPage('ethos')" data-ko="비건 &amp; 친환경" data-zh="纯素 &amp; 环保">비건 &amp; 친환경</button>
+      <button onclick="showPage('contact')" data-ko="문의" data-zh="联系我们">문의</button>
+    </div>
+    <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE: ORIGIN / 제주 스토리    -->
+<!-- ══════════════════════════════ -->
+<div id="page-origin" class="page">
+  <div class="sub-hero">
+    <img src="https://images.unsplash.com/photo-1724078715426-4655c0087e8e?w=860&q=80" alt="Jeju" />
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-text">
+      <p class="label" data-ko="FROM JEJU · KOREA" data-zh="韩国 · 济州岛">FROM JEJU · KOREA</p>
+      <h1 data-ko="제주<br /><em>브랜드 스토리</em>" data-zh="济州<br /><em>品牌故事</em>">제주<br /><em>브랜드 스토리</em></h1>
+    </div>
+  </div>
+
+  <div class="sub-body">
+    <div class="sub-section reveal">
+      <p class="story-pull" data-ko="진흙 속에서도 피어오르는<br />강인한 생명력으로<br />피부를 건강하고 촉촉하게<br /><em>다독이는 자연의 보화</em>" data-zh="即使在泥泞中也能绽放的<br />顽强生命力，<br />温柔呵护肌肤<br /><em>大自然的珍贵馈赠</em>">진흙 속에서도 피어오르는<br />강인한 생명력으로<br />피부를 건강하고 촉촉하게<br /><em>다독이는 자연의 보화</em></p>
+      <p data-ko="백련잎은 뛰어난 항산화 기능과 함께 철분, 비타민C, 칼륨, 탄닌, 칼슘, 식이섬유 함유량 또한 높아 피부미용에도 탁월한 효과가 있는 건강한 재료입니다." data-zh="白莲叶富含铁、维生素C、钾、单宁、钙及膳食纤维，抗氧化功效卓越，是对肌肤美容有显著效果的天然原料。">백련잎은 뛰어난 항산화 기능과 함께 철분, 비타민C, 칼륨, 탄닌, 칼슘, 식이섬유 함유량 또한 높아 피부미용에도 탁월한 효과가 있는 건강한 재료입니다.</p>
+    </div>
+
+    <img class="story-img reveal" src="https://images.unsplash.com/photo-1734784438177-ade1c3eae95c?w=860&q=80" alt="Lotus Pond Jeju" />
+
+    <div class="sub-section reveal">
+      <p class="label" data-ko="연 속에는 자연의 에너지가 가득합니다" data-zh="莲中蕴含大自然的能量">연 속에는 자연의 에너지가 가득합니다</p>
+      <h2 data-ko="빛의 시작과 마지막인<br />태양을 품은 <em>백련</em>" data-zh="承载日出与日落<br />拥抱阳光的<em>白莲</em>">빛의 시작과 마지막인<br />태양을 품은 <em>백련</em></h2>
+      <p data-ko="오랜 세월 전해져 내려온 진귀한 연. 더퓨어로터스의 뿌리입니다. 제주의 청정 환경에서 자란 백련은 그 어떤 성분보다 깨끗하고 순수한 에너지를 머금고 있습니다." data-zh="世代相传的珍贵莲花，是The Pure Lotus的根。生长于济州清净自然环境中的白莲，蕴含着比任何成分都纯净的天然能量。">오랜 세월 전해져 내려온 진귀한 연. 더퓨어로터스의 뿌리입니다. 제주의 청정 환경에서 자란 백련은 그 어떤 성분보다 깨끗하고 순수한 에너지를 머금고 있습니다.</p>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <div class="sub-section reveal">
+      <p class="label" data-ko="from Jeju, Korea" data-zh="来自韩国济州岛">from Jeju, Korea</p>
+      <h2 data-ko="제주가 선택한<br /><em>식물의 힘</em>" data-zh="济州孕育的<br /><em>植物力量</em>">제주가 선택한<br /><em>식물의 힘</em></h2>
+      <p data-ko="화산 토양과 청정 해풍이 빚어낸 제주의 자연은 식물 성분의 밀도와 순도를 높입니다. 더퓨어로터스는 이 땅의 에너지를 그대로 피부에 전합니다." data-zh="火山土壤与清净海风孕育的济州自然，提升了植物成分的浓度与纯度。The Pure Lotus将这片土地的能量原汁原味地传递给肌肤。">화산 토양과 청정 해풍이 빚어낸 제주의 자연은 식물 성분의 밀도와 순도를 높입니다. 더퓨어로터스는 이 땅의 에너지를 그대로 피부에 전합니다.</p>
+      <div class="cert-list" style="margin-top:24px">
+        <span class="cert-badge" data-ko="2021 제주스타기업" data-zh="2021济州明星企业">2021 제주스타기업</span>
+        <span class="cert-badge" data-ko="수출유망중소기업" data-zh="出口潜力中小企业">수출유망중소기업</span>
+        <span class="cert-badge" data-ko="벤처기업확인서" data-zh="创业企业认证">벤처기업확인서</span>
+        <span class="cert-badge" data-ko="우수논문상" data-zh="优秀论文奖">우수논문상</span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="footer-logo">THE PURE LOTUS</p>
+    <div class="footer-nav">
+      <button onclick="showPage('home')" data-ko="홈" data-zh="首页">홈</button>
+      <button onclick="showPage('botanical')" data-ko="성분 &amp; 연구" data-zh="成分 &amp; 研究">성분 &amp; 연구</button>
+      <button onclick="showPage('ethos')" data-ko="비건 &amp; 친환경" data-zh="纯素 &amp; 环保">비건 &amp; 친환경</button>
+      <button onclick="showPage('contact')" data-ko="문의" data-zh="联系我们">문의</button>
+    </div>
+    <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE: ETHOS / 비건 & 친환경   -->
+<!-- ══════════════════════════════ -->
+<div id="page-ethos" class="page">
+  <div class="sub-hero">
+    <img src="https://images.unsplash.com/photo-1768081977305-b5db21d91ec1?w=860&q=80" alt="Ethos" />
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-text">
+      <p class="label" data-ko="VEGAN · CLEAN · ECO" data-zh="纯素 · 纯净 · 环保">VEGAN · CLEAN · ECO</p>
+      <h1 data-ko="비건 &amp;<br /><em>친환경</em>" data-zh="纯素 &amp;<br /><em>环保</em>">비건 &amp;<br /><em>친환경</em></h1>
+    </div>
+  </div>
+
+  <div class="sub-body">
+
+    <div class="sub-section reveal">
+      <div class="ethos-card">
+        <p class="ethos-card-title" data-ko="Clean <em>Beauty</em>" data-zh="纯净 <em>美妆</em>">Clean <em>Beauty</em></p>
+        <p class="ethos-card-sub" data-ko="클린뷰티" data-zh="纯净美妆">클린뷰티</p>
+        <p data-ko="유해한 성분을 최대한 배제해 만든 화장품으로 피부 건강은 물론 환경과 윤리적 소비까지 지속가능한 제품입니다. 9가지 보태니컬 원료만으로 구성된 무첨가 클린 포뮬러." data-zh="最大限度排除有害成分的化妆品，不仅守护肌肤健康，更实现环保与道德消费的可持续产品。由9种植物原料构成的无添加纯净配方，低刺激敏感肌适用。">유해한 성분을 최대한 배제해 만든 화장품으로 피부 건강은 물론 환경과 윤리적 소비까지 지속가능한 제품입니다. 9가지 보태니컬 원료만으로 구성된 무첨가 클린 포뮬러.</p>
+      </div>
+
+      <div class="ethos-card" style="margin-top:16px">
+        <p class="ethos-card-title" data-ko="Vegan <em>Beauty</em>" data-zh="纯素 <em>美妆</em>">Vegan <em>Beauty</em></p>
+        <p class="ethos-card-sub" data-ko="비건뷰티 · The Vegan Society 인증" data-zh="纯素美妆 · The Vegan Society认证">비건뷰티 · The Vegan Society 인증</p>
+        <p data-ko="더퓨어로터스는 자연에서 얻은 높은 품질의 식물추출 성분으로 안전하고 건강한 스킨케어 제품을 만듭니다. 전성분 비건등급의 제주 보태니컬 성분으로 피부에 편안함을 선사합니다." data-zh="The Pure Lotus采用来自自然的高品质植物提取成分，制造安全健康的护肤产品。全成分纯素等级的济州植物成分，为肌肤带来舒适体验。无动物实验，素食认证。">더퓨어로터스는 자연에서 얻은 높은 품질의 식물추출 성분으로 안전하고 건강한 스킨케어 제품을 만듭니다. 전성분 비건등급의 제주 보태니컬 성분으로 피부에 편안함을 선사합니다.</p>
+      </div>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <!-- FSC PACKAGING -->
+    <div class="sub-section reveal">
+      <p class="label" data-ko="ECO PACKAGING" data-zh="环保包装">ECO PACKAGING</p>
+      <h2 data-ko="환경을 생각한<br /><em>종이튜브 패키지</em>" data-zh="守护地球的<br /><em>纸管包装</em>">환경을 생각한<br /><em>종이튜브 패키지</em></h2>
+      <p data-ko="FSC인증 친환경 종이 사용으로 일반 용기 대비 플라스틱 사용량 80% 이상 감소. 종이 튜브 형태라 남김없이 끝까지 쓸 수 있습니다." data-zh="使用FSC认证环保纸张，与普通容器相比减少80%以上塑料使用量。纸管设计可以用尽最后一滴，实现零浪费。">FSC인증 친환경 종이 사용으로 일반 용기 대비 플라스틱 사용량 80% 이상 감소. 종이 튜브 형태라 남김없이 끝까지 쓸 수 있습니다.</p>
+
+      <div class="fsc-stat">
+        <span class="fsc-num">80<span style="font-size:28px">%</span></span>
+        <span class="fsc-unit" data-ko="플라스틱 감소" data-zh="减少塑料使用">플라스틱 감소</span>
+      </div>
+      <p class="fsc-desc" data-ko="1년간 플라스틱 용기 대신 종이튜브 사용시 30년생 소나무 2,778 그루를 심는 효과. CO₂ 3만 톤 절감에 해당합니다." data-zh="全年使用纸管代替塑料容器，相当于种植2,778棵30年松树，减少CO₂排放3万吨。">1년간 플라스틱 용기 대신 종이튜브 사용시 30년생 소나무 2,778 그루를 심는 효과. CO₂ 3만 톤 절감에 해당합니다.</p>
+
+      <div class="chart-wrap">
+        <p class="chart-title" data-ko="FSC인증 종이튜브 효과" data-zh="FSC认证纸管效果">FSC인증 종이튜브 효과</p>
+        <div style="display:flex; gap:32px; align-items:center; padding: 8px 0">
+          <div style="text-align:center">
+            <div style="font-size:32px; margin-bottom:6px">🌲</div>
+            <p style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:#7A8C7B">2,778</p>
+            <p class="chart-lbl" data-ko="30년생 소나무" data-zh="30年松树">30년생 소나무</p>
+          </div>
+          <div style="flex:1; text-align:center">
+            <p style="font-size:9px; letter-spacing:0.3em; color:#C4B5A8; font-weight:300">= CO₂</p>
+            <p style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:#1C1C1C; margin:4px 0">−3만톤</p>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:32px; margin-bottom:6px">🚗</div>
+            <p style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:#7A8C7B">12,501</p>
+            <p class="chart-lbl" data-ko="대 승용차 연간 배출량" data-zh="辆汽车年排放量">대 승용차 연간 배출량</p>
+          </div>
+        </div>
+        <p class="chart-note" data-ko="*우리나라 5천만명 중 30%가 1년에 10개의 튜브제품 사용, 연1.5만km당 CO₂배출량 162g 기준" data-zh="*基于韩国5000万人中30%每年使用10个管状产品，每1.5万km CO₂排放162g计算">*우리나라 5천만명 중 30%가 1년에 10개의 튜브제품 사용, 연1.5만km당 CO₂배출량 162g 기준</p>
+      </div>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <div class="sub-section reveal">
+      <p class="label" data-ko="OUR PROMISE" data-zh="我们的承诺">OUR PROMISE</p>
+      <p class="ethos-quote" style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; line-height:1.6; letter-spacing:0.04em; color:#1C1C1C;" data-ko='"Nothing added.<br />Nothing taken.<br />Nothing wasted."' data-zh='"无多余添加.<br />无刻意删减.<br />无一丝浪费."'>"Nothing added.<br />Nothing taken.<br />Nothing wasted."</p>
+    </div>
+
+  </div>
+  <footer>
+    <p class="footer-logo">THE PURE LOTUS</p>
+    <div class="footer-nav">
+      <button onclick="showPage('home')" data-ko="홈" data-zh="首页">홈</button>
+      <button onclick="showPage('botanical')" data-ko="성분 &amp; 연구" data-zh="成分 &amp; 研究">성분 &amp; 연구</button>
+      <button onclick="showPage('origin')" data-ko="제주 스토리" data-zh="济州故事">제주 스토리</button>
+      <button onclick="showPage('contact')" data-ko="문의" data-zh="联系我们">문의</button>
+    </div>
+    <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════ -->
+<!-- PAGE: CONTACT / 문의          -->
+<!-- ══════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="sub-hero">
+    <img src="https://images.unsplash.com/photo-1734784438177-ade1c3eae95c?w=860&q=80" alt="Contact" />
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-text">
+      <p class="label" data-ko="GET IN TOUCH" data-zh="联系我们">GET IN TOUCH</p>
+      <h1 data-ko="문의" data-zh="联系<em>我们</em>">문의</h1>
+    </div>
+  </div>
+
+  <div class="sub-body">
+    <div class="contact-block reveal">
+      <p class="contact-label" data-ko="CS CENTER" data-zh="客服中心">CS CENTER</p>
+      <p class="contact-phone">070-5147-6672</p>
+      <p class="contact-hours" data-ko="평일 09:30 ~ 17:30" data-zh="工作日 09:30 ~ 17:30">평일 09:30 ~ 17:30</p>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <div class="contact-block reveal">
+      <p class="contact-label" data-ko="BRAND INFO" data-zh="品牌信息">BRAND INFO</p>
+      <div class="contact-info-row">
+        <span class="contact-info-key" data-ko="이메일" data-zh="邮箱">이메일</span>
+        <span class="contact-info-val">thepurelotus@naver.com</span>
+      </div>
+      <div class="contact-info-row">
+        <span class="contact-info-key" data-ko="팩스" data-zh="传真">팩스</span>
+        <span class="contact-info-val">064-721-4470</span>
+      </div>
+      <div class="contact-info-row">
+        <span class="contact-info-key" data-ko="주소" data-zh="地址">주소</span>
+        <span class="contact-info-val" data-ko="제주특별자치도 제주시 첨단로8길 40 제주산학협력 기업연구관 302호" data-zh="济州特别自治道 济州市 尖端路8街 40号 济州产学合作企业研究馆302室">제주특별자치도 제주시 첨단로8길 40 제주산학협력 기업연구관 302호</span>
+      </div>
+      <div class="contact-info-row">
+        <span class="contact-info-key" data-ko="사업자" data-zh="营业执照">사업자</span>
+        <span class="contact-info-val">580-88-00713</span>
+      </div>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <div class="contact-block reveal">
+      <p class="contact-label" data-ko="CHANNEL" data-zh="官方渠道">CHANNEL</p>
+      <div class="contact-qr-row">
+        <div class="contact-qr-item">
+          <div class="contact-qr-box">🛍</div>
+          <p class="contact-qr-lbl" data-ko="카카오채널" data-zh="Kakao">카카오채널</p>
+        </div>
+        <div class="contact-qr-item">
+          <div class="contact-qr-box">🌐</div>
+          <p class="contact-qr-lbl" data-ko="공식몰" data-zh="官方商城">공식몰</p>
+        </div>
+        <div class="contact-qr-item">
+          <div class="contact-qr-box">📸</div>
+          <p class="contact-qr-lbl">Instagram</p>
+        </div>
+      </div>
+      <div class="contact-channels" style="margin-top:28px">
+        <a href="https://www.thepurelotus.com" target="_blank" class="contact-channel-btn" data-ko="공식 웹사이트" data-zh="官方网站">공식 웹사이트</a>
+        <a href="mailto:thepurelotus@naver.com" class="contact-channel-btn" data-ko="이메일 문의" data-zh="邮件咨询">이메일 문의</a>
+      </div>
+    </div>
+
+    <div class="sub-rule"></div>
+
+    <div class="reveal" style="text-align:center; padding-bottom: 24px;">
+      <p class="label" style="margin-bottom:16px" data-ko="CERTIFIED BY" data-zh="认证机构">CERTIFIED BY</p>
+      <div class="cert-list" style="justify-content:center">
+        <span class="cert-badge">VEGAN</span>
+        <span class="cert-badge">ISO</span>
+        <span class="cert-badge">cGMP</span>
+        <span class="cert-badge">CPNP</span>
+        <span class="cert-badge">JEJU STARS</span>
+        <span class="cert-badge">FSC</span>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="footer-logo">THE PURE LOTUS</p>
+    <div class="footer-nav">
+      <button onclick="showPage('home')" data-ko="홈" data-zh="首页">홈</button>
+      <button onclick="showPage('botanical')" data-ko="성분 &amp; 연구" data-zh="成分 &amp; 研究">성분 &amp; 연구</button>
+      <button onclick="showPage('origin')" data-ko="제주 스토리" data-zh="济州故事">제주 스토리</button>
+      <button onclick="showPage('ethos')" data-ko="비건 &amp; 친환경" data-zh="纯素 &amp; 环保">비건 &amp; 친환경</button>
+    </div>
+    <p class="footer-copy" data-ko="© 2026 THE PURE LOTUS · JEJU, KOREA" data-zh="© 2026 THE PURE LOTUS · 韩国天然 · 济州岛">© 2026 THE PURE LOTUS · JEJU, KOREA</p>
+  </footer>
+</div>
+
+<!-- PRODUCT PANELS -->
 <div class="product-panel-backdrop" id="panelBackdrop" onclick="closePanel()"></div>
 
-<!-- CREAM PANEL -->
 <div class="product-panel" id="panel-cream">
   <div class="panel-drag-bar"></div>
   <button class="panel-close" onclick="closePanel()">×</button>
-  <img class="panel-img" src="cream.png" alt="리바이탈라이징 크림" />
+  <img class="panel-img" src="cream.png" alt="크림" />
   <div class="panel-body">
     <p class="panel-label" data-ko="NO. 01 · CREAM" data-zh="NO. 01 · 面霜">NO. 01 · CREAM</p>
     <h2 class="panel-title" data-ko="제주 연꽃잎<br />리바이탈라이징 크림" data-zh="济州莲花叶<br />活肤紧致面霜">제주 연꽃잎<br />리바이탈라이징 크림</h2>
@@ -425,7 +776,7 @@
     <p class="panel-section-title" data-ko="ABOUT" data-zh="产品介绍">ABOUT</p>
     <p class="panel-desc" data-ko="탄력이 저하되고 지친 피부에 활성화 에너지를 전해주어 피부장벽 강화에 도움을 주는 사계절 필수 크림. 제주 연꽃잎 발효 성분이 수분·탄력·진정·주름개선·미백을 동시에 케어합니다." data-zh="为弹力下降的敏感肌肤注入活化能量，强化肌肤屏障。采用济州莲花叶发酵植物精华，富含抗氧化多酚与黄酮类成分，同步呵护保湿、弹力、镇静、抗皱、美白，低刺激纯净配方。">탄력이 저하되고 지친 피부에 활성화 에너지를 전해주어 피부장벽 강화에 도움을 주는 사계절 필수 크림. 제주 연꽃잎 발효 성분이 수분·탄력·진정·주름개선·미백을 동시에 케어합니다.</p>
     <p class="panel-section-title" data-ko="KEY INGREDIENTS" data-zh="核心成分">KEY INGREDIENTS</p>
-    <div class="panel-ingredients" id="cream-ingredients">
+    <div class="panel-ingredients">
       <span class="ingredient-tag" data-ko="연꽃잎 발효 추출물" data-zh="莲花叶发酵提取物">연꽃잎 발효 추출물</span>
       <span class="ingredient-tag" data-ko="히알루론산" data-zh="透明质酸">히알루론산</span>
       <span class="ingredient-tag" data-ko="병풀 추출물" data-zh="积雪草提取物">병풀 추출물</span>
@@ -435,28 +786,24 @@
     </div>
     <div class="panel-badges">
       <span class="panel-badge">VEGAN CERTIFIED</span>
-      <span class="panel-badge">SPF-FREE</span>
       <span class="panel-badge">CLEAN BEAUTY</span>
       <span class="panel-badge" data-ko="주름개선 기능성" data-zh="抗皱 · 成分党认证">주름개선 기능성</span>
     </div>
-    <a class="panel-buy-btn" data-ko="SHOP NOW" data-zh="立即购买"
-       href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000015"
-       target="_blank">SHOP NOW</a>
+    <a class="panel-buy-btn" data-ko="SHOP NOW" data-zh="立即购买" href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000015" target="_blank">SHOP NOW</a>
   </div>
 </div>
 
-<!-- SUNSCREEN PANEL -->
 <div class="product-panel" id="panel-sun">
   <div class="panel-drag-bar"></div>
   <button class="panel-close" onclick="closePanel()">×</button>
-  <img class="panel-img" src="sunscreen.png" alt="하이드로부스트 선스크린" />
+  <img class="panel-img" src="sunscreen.png" alt="선스크린" />
   <div class="panel-body">
     <p class="panel-label" data-ko="NO. 02 · SUN CARE" data-zh="NO. 02 · 防晒">NO. 02 · SUN CARE</p>
     <h2 class="panel-title" data-ko="제주보태니컬<br />하이드로부스트 선스크린" data-zh="济州植物<br />水润防晒霜">제주보태니컬<br />하이드로부스트 선스크린</h2>
     <p class="panel-price">₩30,000 · 50ml</p>
     <div class="panel-divider"></div>
     <p class="panel-section-title" data-ko="ABOUT" data-zh="产品介绍">ABOUT</p>
-    <p class="panel-desc" data-ko="수분크림 제형의 무백탁 선스크린. SPF50+ PA++++의 강력한 자외선 차단력과 함께 제주 보태니컬 성분이 피부에 수분을 공급하며 주름개선·미백까지 케어합니다. 산호초에 무해한 성분으로 설계된 클린 선케어." data-zh="水润面霜质地的无白浊防晒霜。SPF50+ PA++++强效防晒，同时济州植物成分为肌肤提供保湿，并呵护抗皱、美白功效。采用对珊瑚礁无害的成分，打造洁净防晒体验。">수분크림 제형의 무백탁 선스크린. SPF50+ PA++++의 강력한 자외선 차단력과 함께 제주 보태니컬 성분이 피부에 수분을 공급하며 주름개선·미백까지 케어합니다. 산호초에 무해한 성분으로 설계된 클린 선케어.</p>
+    <p class="panel-desc" data-ko="수분크림 제형의 무백탁 선스크린. SPF50+ PA++++의 강력한 자외선 차단력과 함께 제주 보태니컬 성분이 피부에 수분을 공급하며 주름개선·미백까지 케어합니다. 산호초에 무해한 성분으로 설계된 클린 선케어." data-zh="水润面霜质地的无白浊防晒霜，妆养一体设计。SPF50+ PA++++强效防晒，济州草本天然成分为敏感肌提供保湿与低刺激防护，同步呵护抗皱、美白，无动物实验纯净防晒。">수분크림 제형의 무백탁 선스크린. SPF50+ PA++++의 강력한 자외선 차단력과 함께 제주 보태니컬 성분이 피부에 수분을 공급하며 주름개선·미백까지 케어합니다. 산호초에 무해한 성분으로 설계된 클린 선케어.</p>
     <p class="panel-section-title" data-ko="KEY INGREDIENTS" data-zh="核心成分">KEY INGREDIENTS</p>
     <div class="panel-ingredients">
       <span class="ingredient-tag" data-ko="연꽃잎 발효 추출물" data-zh="莲花叶发酵提取物">연꽃잎 발효 추출물</span>
@@ -472,9 +819,7 @@
       <span class="panel-badge">VEGAN CERTIFIED</span>
       <span class="panel-badge">REEF-SAFE</span>
     </div>
-    <a class="panel-buy-btn" data-ko="SHOP NOW" data-zh="立即购买"
-       href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000110"
-       target="_blank">SHOP NOW</a>
+    <a class="panel-buy-btn" data-ko="SHOP NOW" data-zh="立即购买" href="https://www.thepurelotus.com/goods/goods_view.php?goodsNo=1000000110" target="_blank">SHOP NOW</a>
   </div>
 </div>
 
@@ -484,22 +829,37 @@
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Hamburger menu
+  // Hamburger
   const hamburger = document.getElementById('hamburger');
-  const overlay = document.getElementById('menuOverlay');
+  const menuOverlay = document.getElementById('menuOverlay');
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
-    overlay.classList.toggle('open');
+    menuOverlay.classList.toggle('open');
   });
   function closeMenu() {
     hamburger.classList.remove('open');
-    overlay.classList.remove('open');
+    menuOverlay.classList.remove('open');
+  }
+
+  // Page navigation
+  function showPage(id) {
+    closeMenu();
+    closePanel();
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+    // re-trigger reveals on new page
+    setTimeout(() => {
+      document.querySelectorAll('#page-' + id + ' .reveal').forEach(el => {
+        revealObserver.observe(el);
+      });
+    }, 50);
   }
 
   // Scroll reveal
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   // Product panel
@@ -507,45 +867,34 @@
   function openPanel(id) {
     closePanel();
     const panel = document.getElementById('panel-' + id);
-    const backdrop = document.getElementById('panelBackdrop');
     if (!panel) return;
     currentPanel = panel;
-    backdrop.classList.add('open');
+    document.getElementById('panelBackdrop').classList.add('open');
     panel.classList.add('open');
     document.body.style.overflow = 'hidden';
     panel.scrollTop = 0;
   }
   function closePanel() {
-    const backdrop = document.getElementById('panelBackdrop');
     if (currentPanel) currentPanel.classList.remove('open');
-    backdrop.classList.remove('open');
+    document.getElementById('panelBackdrop').classList.remove('open');
     document.body.style.overflow = '';
     currentPanel = null;
   }
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
   // Language toggle
   let currentLang = 'ko';
-
   function setLang(lang) {
     currentLang = lang;
     document.getElementById('btnKo').classList.toggle('active', lang === 'ko');
     document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
     document.documentElement.lang = lang === 'ko' ? 'ko' : 'zh-CN';
-
-    // Update all data-ko / data-zh elements
     document.querySelectorAll('[data-ko]').forEach(el => {
       const text = lang === 'ko' ? el.getAttribute('data-ko') : el.getAttribute('data-zh');
       if (text !== null) el.innerHTML = text;
     });
-
-    // Email input placeholder
     const emailInput = document.getElementById('emailInput');
-    if (emailInput) {
-      emailInput.placeholder = lang === 'ko'
-        ? emailInput.getAttribute('data-ko-placeholder')
-        : emailInput.getAttribute('data-zh-placeholder');
-    }
+    if (emailInput) emailInput.placeholder = lang === 'ko' ? emailInput.getAttribute('data-ko-placeholder') : emailInput.getAttribute('data-zh-placeholder');
   }
 </script>
 </body>
